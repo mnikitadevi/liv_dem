@@ -1,0 +1,16 @@
+liv_dem/
+├── data/
+│   ├── raw/              # downloaded once, never touched again
+│   └── processed/        # resized/cleaned, ready to feed into training
+├── models/
+│   ├── model_a.pt        # freshly trained live tomorrow — not committed, gitignored
+│   └── model_b.pt        # pretrained weights, cached tonight
+├── src/
+│   ├── fetch.py          # one-time download → data/raw/, idempotent (skip if exists)
+│   ├── prepare.py        # raw → processed (resize, split train/test)
+│   ├── train.py          # trains Model A, saves to models/model_a.pt, prints/logs accuracy per epoch
+│   ├── infer.py          # loads either model, runs prediction on an image/webcam frame
+│   └── ui.py             # gradio app, imports infer.py, wires up both models
+├── main.py               # thin entrypoint — just calls ui.launch()
+├── pyproject.toml
+└── uv.lock
